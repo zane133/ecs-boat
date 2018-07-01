@@ -12,7 +12,7 @@ public class BootStarp : MonoBehaviour {
 
         for (int i = 0; i < entities.Length; i++)
         {
-            if (entityManager.HasComponent<Initialize>(entities[i]))
+            if (entityManager.HasComponent<MoveStatus>(entities[i]))
             {
 
                 MoveStatus moveStatus = new MoveStatus();
@@ -23,8 +23,6 @@ public class BootStarp : MonoBehaviour {
                 moveStatus.TimeZ = 0;
 
                 entityManager.SetComponentData(entities[i], moveStatus);
-
-                entityManager.RemoveComponent<Initialize>(entities[i]);
             }
         }
     }
