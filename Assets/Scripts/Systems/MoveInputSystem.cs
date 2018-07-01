@@ -19,40 +19,54 @@ public class MoveInputSystem : ComponentSystem {
     {
         for (int i = 0; i != m_Group.Length; i++)
         {
-            PositionMove(i);
-            Rotate(i);
+            var moveInput = m_Group.MoveInput[i];
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                moveInput.Move.z = -1;
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                moveInput.Move.z = 1;
+            }
+            else
+            {
+                moveInput.Move.z = 0;
+            }
+            if (Input.GetKeyUp(KeyCode.W)){
+                moveInput.Move.z = -2;
+            }else if( Input.GetKeyUp(KeyCode.S))
+            {
+                moveInput.Move.z = 2;
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveInput.Move.y = 1;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                moveInput.Move.y = -1;
+            }
+            else
+            {
+                moveInput.Move.y = 0;
+            }
+
+            if (Input.GetKey(KeyCode.Q))
+            {
+                moveInput.Move.x = 1;
+            }
+            else if (Input.GetKey(KeyCode.Z))
+            {
+                moveInput.Move.x = -1;
+            }
+            else
+            {
+                moveInput.Move.x = 0;
+            }
+
+            m_Group.MoveInput[i] = moveInput;
         }
-    }
-
-    private void Rotate(int i)
-    {
-        var moveInput = m_Group.MoveInput[i];
-
-        moveInput.Rotate = Quaternion.Euler(0f, Input.GetAxis("Horizontal"), 0f);
-
-        m_Group.MoveInput[i] = moveInput;
-    }
-
-    private void PositionMove(int i)
-    {
-        var moveInput = m_Group.MoveInput[i];
-
-        //moveInput.Move.x = Input.GetAxis("Horizontal");
-        moveInput.Move.z = Input.GetAxis("Vertical");
-
-        if (Input.GetKey(KeyCode.Q))
-        {
-            moveInput.Move.y = 1;
-        }
-        else if (Input.GetKey(KeyCode.Z))
-        {
-            moveInput.Move.y = -1;
-        }
-        else
-        {
-            moveInput.Move.y = 0;
-        }
-
-        m_Group.MoveInput[i] = moveInput;
     }
 }

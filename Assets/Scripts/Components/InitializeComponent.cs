@@ -5,9 +5,8 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
-public struct MoveInput : IComponentData {
-    // 移动大小
-    public Vector3 Move;
+public struct Initialize : IComponentData
+{
 }
 
-public class MoveInputComponent : ComponentDataWrapper<MoveInput> {}
+public class InitializeComponent : ComponentDataWrapper<Initialize> { }
